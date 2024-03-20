@@ -6,8 +6,6 @@ class SPXOptionsData:
         self.ib = IB()
         self.ib.connect('127.0.0.1', 7496, clientId=888)
 
-    def fetch_SPX(self):
-
         self.spx = Index('SPX', 'CBOE')
         self.ib.qualifyContracts(self.spx)
 
@@ -26,3 +24,11 @@ class SPXOptionsData:
 
         put_contracts = [Option('SPX', expiration, strike, 'P', 'SMART', tradingClass='SPXW') for strike in put_strikes]
         call_contracts = [Option('SPX', expiration, strike, 'C', 'SMART', tradingClass='SPXW') for strike in call_strikes]
+
+        put_contracts = self.ib.qualifyContracts(*put_contracts)
+        call_contracts = self.ib.qualifyContracts(*call_contracts)
+
+        put_tickers = self.ib.reqTickers(*put_contracts)
+        call_tickers = self.ib.reqTickers(*call_contracts)
+
+        return put_tickers, call_tickers
