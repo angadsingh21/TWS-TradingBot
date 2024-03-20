@@ -11,7 +11,9 @@ def get_data(width, entry_credit, max_call_spreads, max_put_spreads):
 
     put_tickers, call_tickers = options_data.get_strikes()
 
-    SC, LC = spr_obj.findCallSpread(call_tickers, width, entry_credit, max_call_spreads)
+    SC, LC = spr_obj.findCallSpread(
+        call_tickers, width, entry_credit, max_call_spreads
+    )
 
     SP, LP = spr_obj.findPutSpread(
         put_tickers, width, entry_credit, max_put_spreads
