@@ -15,8 +15,9 @@ class SPXOptionsData:
         self.spxValue = ticker.marketPrice()
 
     def get_strikes(self):
+
         current_date = int(datetime.now().strftime("%Y%m%d"))
-        expiration = current_date + 1
+        expiration = current_date + 0
 
         # gen OTM call strikes
         call_strikes = [value for value in range( int( (self.spxValue) // 5 + 1 ) * 5, int(self.spxValue + 135), 5)]
