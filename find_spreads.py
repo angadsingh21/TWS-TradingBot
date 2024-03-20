@@ -1,26 +1,24 @@
 import pandas as pd
 
 from sessions import insync_session
-from models import *
+from models import spreads, contracts
 
 def get_data(width, entry_credit, max_call_spreads, max_put_spreads):
     
     options_data = insync_session.SPXOptionsData()
-    spreads = spreads.Spreads()
-    contracts = contracts.Contracts()
+    spr_obj = spreads.Spreads()
+    con_obj = contracts.Contracts()
 
     put_tickers, call_tickers = options_data.get_strikes()
 
-    SC, LC = spreads.find_call_spread(
-        call_tickers, width, entry_credit, max_call_spreads
-    )
+    SC, LC = spr_obj.findCallSpread(call_tickers, width, entry_credit, max_call_spreads)
 
-    SP, LP = spreads.find_put_spread(
+    SP, LP = spr_obj.findPutSpread(
         put_tickers, width, entry_credit, max_put_spreads
     )
 
-    call_watchlist = contracts.create_watchlist(SC, LC)
-    put_watchlist = contracts.create_watchlist(SP, LP)
+    call_watchlist = con_obj.create_watchlist(SC, LC)
+    put_watchlist = con_obj.create_watchlist(SP, LP)
 
     return call_watchlist, put_watchlist
 
@@ -42,6 +40,8 @@ def main():
     entry_credit = float(input("Enter the entry_credit (float): "))
     max_call_spreads = int(input("Enter the max number of call spreads: "))
     max_put_spreads = int(input("Enter the max number of put spreads: "))
+
+    width = int(width/5 - 1)
 
     call_watchlist, put_watchlist = get_data(
         width, entry_credit, max_call_spreads, max_put_spreads

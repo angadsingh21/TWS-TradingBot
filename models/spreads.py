@@ -1,5 +1,3 @@
-from sessions import insync_session
-
 class Spreads:
 
     def calc_credit(contract_tickers, ticker, short_indx):
