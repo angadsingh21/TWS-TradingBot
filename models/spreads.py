@@ -2,7 +2,7 @@ import math
 
 class Spreads:
 
-    def calc_credit(contract_tickers, ticker, short_indx):
+    def calc_credit(self, contract_tickers, ticker, short_indx):
 
         long_bid = ticker.bid
         long_ask = ticker.ask
@@ -35,7 +35,7 @@ class Spreads:
                 continue
 
             try:
-                credit = calc_credit(call_tickers, ticker, short_indx)
+                credit = self.calc_credit(call_tickers, ticker, short_indx)
             
             except Exception as e:
                 print(f"Exception: {type(e)}")  # Print exception type
@@ -44,7 +44,7 @@ class Spreads:
 
             if credit >= entry_credit - 0.001:
                 
-                short_call_spread.append(put_tickers[short_indx])
+                short_call_spread.append(call_tickers[short_indx])
                 long_call_spread.append(ticker)
 
                 spread_count += 1
@@ -69,7 +69,7 @@ class Spreads:
                 continue
 
             try:
-                credit = calc_credit(call_tickers, ticker, short_indx)
+                credit = self.calc_credit(put_tickers, ticker, short_indx)
             
             except Exception as e:
                 print(f"Exception: {type(e)}")  # Print exception type
