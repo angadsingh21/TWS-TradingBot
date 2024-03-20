@@ -1,3 +1,5 @@
+import math
+
 class Spreads:
 
     def calc_credit(contract_tickers, ticker, short_indx):
@@ -17,7 +19,7 @@ class Spreads:
         return credit
     
 
-    def findCallSpread(call_tickers, width, entry_credit, nos):
+    def findCallSpread(self, call_tickers, width, entry_credit, nos):
 
         indx = 0
         spread_count = 0
@@ -51,7 +53,7 @@ class Spreads:
                     return short_call_spread, long_call_spread
 
 
-    def findPutSpread(put_tickers, width, entry_credit, nos):
+    def findPutSpread(self, put_tickers, width, entry_credit, nos):
 
         indx = -1
         spread_count = 0
