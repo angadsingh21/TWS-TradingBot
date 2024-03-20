@@ -22,7 +22,7 @@ def get_data(width, entry_credit, max_call_spreads, max_put_spreads):
     call_watchlist = con_obj.create_watchlist(SC, LC)
     put_watchlist = con_obj.create_watchlist(SP, LP)
 
-    return call_watchlist, put_watchlist
+    return call_watchlist, put_watchlist, options_data.expiration
 
 
 def display_data(call_watchlist, put_watchlist):
@@ -45,11 +45,11 @@ def main():
 
     width = int(width/5 - 1)
 
-    call_watchlist, put_watchlist = get_data(
+    call_watchlist, put_watchlist, contractDate = get_data(
         width, entry_credit, max_call_spreads, max_put_spreads
     )
 
-    print(options_data.expiration)
+    print("\n\n", contractDate)
 
     display_data(call_watchlist, put_watchlist)
 
