@@ -1,13 +1,13 @@
 import pandas as pd
 
-from ..sessions import insync_session
-from models import spreads, contracts
+from sessions import insync_session
+from models import *
 
 def get_data(width, entry_credit, max_call_spreads, max_put_spreads):
     
-    options_data = SPXOptionsData()
-    spreads = Spreads()
-    contracts = Contracts()
+    options_data = insync_session.SPXOptionsData()
+    spreads = spreads.Spreads()
+    contracts = contracts.Contracts()
 
     put_tickers, call_tickers = options_data.get_strikes()
 
