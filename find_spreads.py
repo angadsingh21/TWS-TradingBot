@@ -49,6 +49,8 @@ def main():
         width, entry_credit, max_call_spreads, max_put_spreads
     )
 
+    print(options_data.expiration)
+
     display_data(call_watchlist, put_watchlist)
 
 
