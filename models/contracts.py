@@ -30,3 +30,4 @@ class Contracts:
             data.append({"credit": credit})
 
         watchlist = pd.DataFrame(data)
+        return watchlist
