@@ -20,9 +20,9 @@ class SPXOptionsData:
 
         # gen OTM call strikes
         call_strikes = [value for value in range( int( (self.spxValue) // 5 + 1 ) * 5, int(self.spxValue + 135), 5)]
-        put_strikes = [value for value in range( int( (self.spxValue) // 5 + 1 ) * 5, int(self.spxValue - 135), -5)]
+        put_strikes = [value for value in range( int( (self.spxValue) // 5 - 1 ) * 5, int(self.spxValue - 135), -5)]
 
-        put_contracts = [Option('SPX', expiration, strike, 'P', 'SMART', tradingClass='SPXW') for strike in put_strikes]
+        put_contracts = [Option('SPX', expiration, strike, 'P', 'SMART', tradingClass='SPXW') for strike in put_strikes[::-1]]
         call_contracts = [Option('SPX', expiration, strike, 'C', 'SMART', tradingClass='SPXW') for strike in call_strikes]
 
         put_contracts = self.ib.qualifyContracts(*put_contracts)
